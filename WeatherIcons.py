@@ -1,5 +1,7 @@
 from inky import InkyWHAT
 
+import weather
+
 inky_display = InkyWHAT("yellow")
 inky_display.set_border(inky_display.WHITE)
 
@@ -240,8 +242,21 @@ def myDrizzle():
     
 myCircle((200, 150), 96, None, prmCol, 1)
 
-myDrizzle()
+#myMostlyCloudyNight()
 #myRaining()
+
+wd = weather.get_weather()
+weather.print_weather(wd)
+
+got_temp = wd['properties']['periods'][0]['temperature']
+
+from font_fredoka_one import FredokaOne
+
+font = ImageFont.truetype(FredokaOne, 36)
+
+draw.text((195, 100), str(got_temp), fill=prmCol, align='center', font=font)
+draw.text((200, 170), wd['properties']['periods'][0]['shortForecast'], fill=prmCol)
+
 
 flipped = img.rotate(180)
 
