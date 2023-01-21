@@ -1,17 +1,26 @@
-from inky import InkyWHAT
-
-import weather
-
-inky_display = InkyWHAT("yellow")
-inky_display.set_border(inky_display.WHITE)
+from PIL import Image, ImageFont, ImageDraw
+##from inky import InkyWHAT
 
 import math
 import numbers
 
-from PIL import Image, ImageFont, ImageDraw
 
-img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
+
+import weather  # Bishop's routine to get weather from weather.gov API
+
+##inky_display = InkyWHAT("yellow")
+##inky_display.set_border(inky_display.WHITE)
+
+##img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
+img = Image.new("P", (400,300))
 draw = ImageDraw.Draw(img)
+
+##bkgCol = inky_display.WHITE
+##prmCol = inky_display.BLACK
+##sndCol = inky_display.YELLOW
+bkgCol = 0
+prmCol = 1
+sndCol = 2
 
 def _compute_regular_polygon_vertices(bounding_circle, n_sides, rotation):
     # 1. Error Handling
@@ -90,10 +99,6 @@ def _compute_regular_polygon_vertices(bounding_circle, n_sides, rotation):
     return [
         _compute_polygon_vertex(centroid, polygon_radius, angle) for angle in angles
     ]
-
-bkgCol = inky_display.WHITE
-prmCol = inky_display.BLACK
-sndCol = inky_display.YELLOW
 
 def myCircle(centerPos, radius, fillColour, outlineColour, outlineWidth):
     centerX = centerPos[0]
@@ -240,25 +245,29 @@ def myDrizzle():
     
 #------------------------------------------------------------
     
-myCircle((200, 150), 96, None, prmCol, 1)
+#myCircle((200, 150), 96, None, prmCol, 1)
 
 #myMostlyCloudyNight()
 #myRaining()
 
-wd = weather.get_weather()
+# get the weather from weather.gov
+wd = weather.get_weather() # returns as JSON objects
 weather.print_weather(wd)
 
-got_temp = wd['properties']['periods'][0]['temperature']
+# from font_fredoka_one import FredokaOne
+# font = ImageFont.truetype(FredokaOne, 36)
 
-from font_fredoka_one import FredokaOne
-
-font = ImageFont.truetype(FredokaOne, 36)
-
-draw.text((195, 100), str(got_temp), fill=prmCol, align='center', font=font)
-draw.text((200, 170), wd['properties']['periods'][0]['shortForecast'], fill=prmCol)
+#draw.rectangle((0,0) + (400,300), fill = 0)
+# draw today's temp & forecast
+#draw.text((195, 100), str(wd['properties']['periods'][0]['temperature']), fill=prmCol, align='center', font=font)
+draw.text((195, 100), str(wd['properties']['periods'][0]['temperature']), fill=1, align='center')  # without font choice
+draw.text((200, 170), wd['properties']['periods'][0]['shortForecast'], fill=0)
 
 
 flipped = img.rotate(180)
 
-inky_display.set_image(flipped)
-inky_display.show()
+# inky_display.set_image(flipped)
+# inky_display.show()
+
+img.save("tmp.png")
+#img.show()
