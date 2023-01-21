@@ -4,8 +4,6 @@ from PIL import Image, ImageFont, ImageDraw
 import math
 import numbers
 
-
-
 import weather  # Bishop's routine to get weather from weather.gov API
 
 ##inky_display = InkyWHAT("yellow")
@@ -13,6 +11,10 @@ import weather  # Bishop's routine to get weather from weather.gov API
 
 ##img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
 img = Image.new("P", (400,300))
+cY = [255, 255, 0]
+cB = [0, 0, 0]
+cW = [255, 255, 255]
+img.putpalette(cW + cB + cY)
 draw = ImageDraw.Draw(img)
 
 ##bkgCol = inky_display.WHITE
@@ -245,29 +247,27 @@ def myDrizzle():
     
 #------------------------------------------------------------
     
-#myCircle((200, 150), 96, None, prmCol, 1)
+myCircle((200, 150), 96, None, prmCol, 1)
 
-#myMostlyCloudyNight()
-#myRaining()
+myMostlyCloudyNight()
+myRaining()
 
 # get the weather from weather.gov
 wd = weather.get_weather() # returns as JSON objects
-weather.print_weather(wd)
+weather.print_weather(wd, 1)
 
 # from font_fredoka_one import FredokaOne
 # font = ImageFont.truetype(FredokaOne, 36)
 
-#draw.rectangle((0,0) + (400,300), fill = 0)
 # draw today's temp & forecast
 #draw.text((195, 100), str(wd['properties']['periods'][0]['temperature']), fill=prmCol, align='center', font=font)
-draw.text((195, 100), str(wd['properties']['periods'][0]['temperature']), fill=1, align='center')  # without font choice
-draw.text((200, 170), wd['properties']['periods'][0]['shortForecast'], fill=0)
-
+draw.text((50, 35), wd['properties']['periods'][1]['name'], fill=prmCol)
+draw.text((50, 50), str(wd['properties']['periods'][1]['temperature']), fill=prmCol, align='center')  # without font choice
+draw.text((70, 50), wd['properties']['periods'][1]['shortForecast'], fill=prmCol)
 
 flipped = img.rotate(180)
 
 # inky_display.set_image(flipped)
 # inky_display.show()
 
-img.save("tmp.png")
-#img.show()
+img.convert("RGB").show()  # preview on PC display
