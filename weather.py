@@ -13,6 +13,6 @@ weather_dict = json.loads(response.read())
 for i in range(4):
 	print(weather_dict['properties']['periods'][i]['name'])
 	print('Temperature ' + str(weather_dict['properties']['periods'][i]['temperature']) + "˚F")
-	print('Wind ' + weather_dict['properties']['periods'][i]['windSpeed'])
+	print('Wind ' + weather_dict['properties']['periods'][i]['windSpeed'] + " from the " + weather_dict['properties']['periods'][i]['windDirection'])
 	print(weather_dict['properties']['periods'][i]['shortForecast'])
 	print("")
