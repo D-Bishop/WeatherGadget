@@ -13,13 +13,13 @@ def get_weather():
     weather_dict = json.loads(response.read())
     return weather_dict
 
-def print_weather(weather_dict):
-    for i in range(4):
+def print_weather(weather_dict, days):
+    for i in range(int(days * 2)):
         print(weather_dict['properties']['periods'][i]['name'])
         print('Temperature ' + str(weather_dict['properties']['periods'][i]['temperature']) + "˚F")
         print('Wind ' + weather_dict['properties']['periods'][i]['windSpeed'])
         print(weather_dict['properties']['periods'][i]['shortForecast'])
         print("")
 
-#wd = get_weather()
-#print_weather(wd)
+wd = get_weather()
+print_weather(wd, 1)
