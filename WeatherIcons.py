@@ -1,28 +1,42 @@
-from PIL import Image, ImageFont, ImageDraw
-##from inky import InkyWHAT
+# D Bishop & M Bishop
+# 2023 01 18
 
+# Use NWS data to display on InkyWHAT display
+
+# IDIOM
+# try:
+#     import json
+# except ImportError:
+#     import simplejson as json
+
+import platform  # lets us know if we're on a Raspberry Pi or desktop machine -- for debugging
+from PIL import Image, ImageFont, ImageDraw
 import math
 import numbers
-
 import weather  # Bishop's routine to get weather from weather.gov API
 
-##inky_display = InkyWHAT("yellow")
-##inky_display.set_border(inky_display.WHITE)
+if platform.system() == 'Linux':
+    # import inky for Raspberry Pi & Inky display
+    from inky import InkyWHAT
+    inky_display = InkyWHAT("yellow")
+    inky_display.set_border(inky_display.WHITE)
+    img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
+    bkgCol = inky_display.WHITE
+    prmCol = inky_display.BLACK
+    sndCol = inky_display.YELLOW
 
-##img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
-img = Image.new("P", (400,300))
-cY = [255, 255, 0]
-cB = [0, 0, 0]
-cW = [255, 255, 255]
-img.putpalette(cW + cB + cY)
+else:
+    # this lets us work on a desktop machine
+    img = Image.new("P", (400,300))
+    cY = [255, 255, 0]
+    cB = [0, 0, 0]
+    cW = [255, 255, 255]
+    img.putpalette(cW + cB + cY)
+    bkgCol = 0
+    prmCol = 1
+    sndCol = 2
+
 draw = ImageDraw.Draw(img)
-
-##bkgCol = inky_display.WHITE
-##prmCol = inky_display.BLACK
-##sndCol = inky_display.YELLOW
-bkgCol = 0
-prmCol = 1
-sndCol = 2
 
 def _compute_regular_polygon_vertices(bounding_circle, n_sides, rotation):
     # 1. Error Handling
@@ -265,9 +279,9 @@ draw.text((50, 35), wd['properties']['periods'][1]['name'], fill=prmCol)
 draw.text((50, 50), str(wd['properties']['periods'][1]['temperature']), fill=prmCol, align='center')  # without font choice
 draw.text((70, 50), wd['properties']['periods'][1]['shortForecast'], fill=prmCol)
 
-flipped = img.rotate(180)
-
-# inky_display.set_image(flipped)
-# inky_display.show()
-
-img.convert("RGB").show()  # preview on PC display
+if platform.system() == 'Linux':
+    flipped = img.rotate(180)
+    inky_display.set_image(flipped)
+    inky_display.show()
+else:
+    img.convert("RGB").show()  # preview on PC display
