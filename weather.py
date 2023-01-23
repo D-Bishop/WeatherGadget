@@ -2,6 +2,11 @@
 # 2023 01 18
 
 # Read data from the NWS & parse
+#
+# • Returns weather as the JSON structure from the NWS
+# • Documentation here: https://www.weather.gov/documentation/services-web-api
+# • Hard-coded to Sewickley for the time being
+
  
 import urllib.request 
 import json
