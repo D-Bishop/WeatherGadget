@@ -18,12 +18,17 @@ def get_weather():
     return weather_dict
 
 def print_weather(weather_dict, days):
-    for i in range(int(days * 2)):
+    for i in range(0, int(days * 2)):
+        print(str(i) + ' ' + str(weather_dict['properties']['periods'][i]['number']))
         print(weather_dict['properties']['periods'][i]['name'])
         print('Temperature ' + str(weather_dict['properties']['periods'][i]['temperature']) + "˚F")
         print('Wind ' + weather_dict['properties']['periods'][i]['windSpeed'])
         print(weather_dict['properties']['periods'][i]['shortForecast'])
+        print(weather_dict['properties']['periods'][i]['icon'])
+        print('P.O.P. ' + str(weather_dict['properties']['periods'][i]['probabilityOfPrecipitation']['value']))
         print("")
 
-wd = get_weather()
-print_weather(wd, 1)
+
+if __name__ == "__main__":    
+    wd = get_weather()
+    print_weather(wd, 1)

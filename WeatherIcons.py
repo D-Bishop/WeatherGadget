@@ -13,30 +13,9 @@ import platform  # lets us know if we're on a Raspberry Pi or desktop machine --
 from PIL import Image, ImageFont, ImageDraw
 import math
 import numbers
+import re
 import weather  # Bishop's routine to get weather from weather.gov API
 
-if platform.system() == 'Linux':
-    # import inky for Raspberry Pi & Inky display
-    from inky import InkyWHAT
-    inky_display = InkyWHAT("yellow")
-    inky_display.set_border(inky_display.WHITE)
-    img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
-    bkgCol = inky_display.WHITE
-    prmCol = inky_display.BLACK
-    sndCol = inky_display.YELLOW
-
-else:
-    # this lets us work on a desktop machine
-    img = Image.new("P", (400,300))
-    cY = [255, 255, 0]
-    cB = [0, 0, 0]
-    cW = [255, 255, 255]
-    img.putpalette(cW + cB + cY)
-    bkgCol = 0
-    prmCol = 1
-    sndCol = 2
-
-draw = ImageDraw.Draw(img)
 
 def _compute_regular_polygon_vertices(bounding_circle, n_sides, rotation):
     # 1. Error Handling
@@ -123,6 +102,7 @@ def myCircle(centerPos, radius, fillColour, outlineColour, outlineWidth):
     draw.ellipse([(centerX-radius,centerY-radius),(centerX+radius,centerY+radius)],
     fill=fillColour, outline=outlineColour, width=outlineWidth)
 
+
 def myArc(centerPos, radius, start, end, fillColour, outlineWidth):
     centerX = centerPos[0]
     centerY = centerPos[1]
@@ -207,11 +187,11 @@ def mySmallMoon():
 
     myArc((200+9, 150-45), 27, 46, 230, prmCol, 5)
 
-def myMostlySunny():
+def myPartlySunny():
     mySunny()
     mySmallCloud()
     
-def myMostlyCloudy():
+def myPartlyCloudy():
     mySmallSun()
     myCloudy()
 
@@ -260,28 +240,68 @@ def myDrizzle():
     
     
 #------------------------------------------------------------
-    
-myCircle((200, 150), 96, None, prmCol, 1)
 
-myMostlyCloudyNight()
-myRaining()
+if __name__ == "__main__":
 
-# get the weather from weather.gov
-wd = weather.get_weather() # returns as JSON objects
-weather.print_weather(wd, 1)
+    if platform.system() == 'Linux':
+        # import inky for Raspberry Pi & Inky display
+        from inky import InkyWHAT
+        inky_display = InkyWHAT("yellow")
+        inky_display.set_border(inky_display.WHITE)
+        img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
+        bkgCol = inky_display.WHITE
+        prmCol = inky_display.BLACK
+        sndCol = inky_display.YELLOW
 
-# from font_fredoka_one import FredokaOne
-# font = ImageFont.truetype(FredokaOne, 36)
+    else:
+        # this lets us work on a desktop machine
+        img = Image.new("P", (400,300))
+        cW = [255, 255, 255]
+        cB = [0, 0, 0]
+        cY = [255, 255, 0]
+        img.putpalette(cW + cB + cY)
+        bkgCol = 0
+        prmCol = 1
+        sndCol = 2
 
-# draw today's temp & forecast
-#draw.text((195, 100), str(wd['properties']['periods'][0]['temperature']), fill=prmCol, align='center', font=font)
-draw.text((50, 35), wd['properties']['periods'][1]['name'], fill=prmCol)
-draw.text((50, 50), str(wd['properties']['periods'][1]['temperature']), fill=prmCol, align='center')  # without font choice
-draw.text((70, 50), wd['properties']['periods'][1]['shortForecast'], fill=prmCol)
+    draw = ImageDraw.Draw(img)
 
-if platform.system() == 'Linux':
-    flipped = img.rotate(180)
-    inky_display.set_image(flipped)
-    inky_display.show()
-else:
-    img.convert("RGB").show()  # preview on PC display
+    myCircle((200, 150), 96, None, prmCol, 1)
+
+
+    # get the weather from weather.gov
+    wd = weather.get_weather() # returns as JSON objects
+    weather.print_weather(wd, 6)
+
+    # for debugging
+    p = 0  # period
+
+    forecast = re.search(".*[day|night]\/(\w*)", wd['properties']['periods'][p]['icon']).group(1)
+    # See: https://api.weather.gov/icons
+    if forecast == "skc" or forecast == "few":
+        mySunny()
+    elif forecast == "sct":
+        myPartlySunny()
+    elif forecast == "bkn":
+        myPartlyCloudy()
+    elif forecast == "ovc":
+        myCloudy()
+    elif forecast =="rain_showers":
+        myRaining()
+
+    # from font_fredoka_one import FredokaOne
+    # font = ImageFont.truetype(FredokaOne, 36)
+
+    # draw today's temp & forecast
+    #draw.text((195, 100), str(wd['properties']['periods'][0]['temperature']), fill=prmCol, align='center', font=font)
+    draw.text((50, 35), wd['properties']['periods'][p]['name'], fill=prmCol)
+    draw.text((50, 50), str(wd['properties']['periods'][p]['temperature']), fill=prmCol, align='center')  # without font choice
+    draw.text((70, 50), wd['properties']['periods'][p]['shortForecast'], fill=prmCol)
+
+    if platform.system() == 'Linux':
+        flipped = img.rotate(180)
+        inky_display.set_image(flipped)
+        inky_display.show()
+    else:
+        img.convert("RGB").show()  # preview on PC display
+        
