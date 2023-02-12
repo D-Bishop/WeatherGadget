@@ -7,6 +7,9 @@
 # • Documentation here: https://www.weather.gov/documentation/services-web-api
 # • Hard-coded to Sewickley for the time being
 
+# Useful discussion on parsing the short forecasts:
+# https://www.wxforum.net/index.php?topic=35582.0
+
  
 import urllib.request 
 import json
