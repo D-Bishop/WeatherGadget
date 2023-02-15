@@ -9,6 +9,9 @@
 
 # Useful discussion on parsing the short forecasts:
 # https://www.wxforum.net/index.php?topic=35582.0
+# Also here:
+# https://www.weather.gov/bgm/forecast_terms
+# https://graphical.weather.gov/xml/rest.php
 
  
 import urllib.request 
