@@ -295,7 +295,7 @@ if __name__ == "__main__":
         img_quarter4 = img_crop4.resize((75, 75))
         
         draw.rectangle([(0, 0), (400, 300)], bkgCol, None, 0)
-        myCloudy(200, 150)
+        myCloudy(162, 150)
         img.paste(img_quarter, (300, 0))
         img.paste(img_quarter2, (300, 75))
         img.paste(img_quarter3, (300, 75+75))
