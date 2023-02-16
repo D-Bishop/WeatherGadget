@@ -305,10 +305,10 @@ if __name__ == "__main__":
         inky_display.show()
     else:
         # try scaling
-        img = img.convert("RGB")
         img_quarter = img.resize((200,150))
         for i in range(0, 2):
             for j in range(0, 2):
                 img.paste(img_quarter, (200*i,150*j))
         
         img.convert("RGB").show()  # preview on PC display
+    img.convert("RGB").show()  # preview on PC display
