@@ -12,9 +12,10 @@ import math
 import numbers
 import re
 import weather      # Routine to get weather from weather.gov API
-import WeatherIcons # Routine to draw icons
+import weather_icons # Routine to draw icons
 
-def weather_display(wd):
+def display_weather(wd):
+    # Main routine to create multi-day weather display
     if platform.system() == 'Linux':
         # import inky for Raspberry Pi & Inky display
         from inky import InkyWHAT
@@ -46,15 +47,15 @@ def weather_display(wd):
     forecast = re.search(".*[day|night]\/(\w*)", wd['properties']['periods'][p]['icon']).group(1)
     # See: https://api.weather.gov/icons
     if forecast == "skc" or forecast == "few":
-        WeatherIcons.mySunny(200, 150)
+        weather_icons.Sunny(200, 150)
     elif forecast == "sct":
-        WeatherIcons.myPartlySunny(200, 150)
+        weather_icons.PartlySunny(200, 150)
     elif forecast == "bkn":
-        WeatherIcons.myPartlyCloudy(200, 150)
+        weather_icons.PartlyCloudy(200, 150)
     elif forecast == "ovc":
-        WeatherIcons.myCloudy(200, 150)
+        weather_icons.Cloudy(200, 150)
     elif forecast =="rain_showers":
-        WeatherIcons.myRaining(200, 150)
+        weather_icons.Raining(200, 150)
 
     # from font_fredoka_one import FredokaOne
     # font = ImageFont.truetype(FredokaOne, 36)
@@ -82,4 +83,4 @@ def weather_display(wd):
 
 if __name__ == "__main__":
 	wd = weather.get_weather()
-	weather_display(wd)
+	display_weather(wd)

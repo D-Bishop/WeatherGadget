@@ -86,7 +86,7 @@ def _compute_regular_polygon_vertices(bounding_circle, n_sides, rotation):
         _compute_polygon_vertex(centroid, polygon_radius, angle) for angle in angles
     ]
 
-def myCircle(centerPos, radius, fillColour, outlineColour, outlineWidth):
+def Circle(centerPos, radius, fillColour, outlineColour, outlineWidth):
     centerX = centerPos[0]
     centerY = centerPos[1]
 
@@ -94,7 +94,7 @@ def myCircle(centerPos, radius, fillColour, outlineColour, outlineWidth):
     fill=fillColour, outline=outlineColour, width=outlineWidth)
 
 
-def myArc(centerPos, radius, start, end, fillColour, outlineWidth):
+def Arc(centerPos, radius, start, end, fillColour, outlineWidth):
     centerX = centerPos[0]
     centerY = centerPos[1]
 
@@ -110,110 +110,110 @@ def star(bounding_circle, fillColour, lineLength, outlineWidth, n_lines, rotatio
     # TODO Figure out if last two lines are necessesary
         draw.line((myOutVert[k], myInVert[k]), fillColour, outlineWidth)
         
-        myCircle(myOutVert[k] , 2, fillColour, None, 0)
-        myCircle(myInVert[k], 2, fillColour, None, 0)
+        Circle(myOutVert[k] , 2, fillColour, None, 0)
+        Circle(myInVert[k], 2, fillColour, None, 0)
 
-def myStars(xPos, yPos):
+def Stars(xPos, yPos, prmCol):
     draw.line([(xPos+24, yPos-8), (236,142)], fill=prmCol, width=5)
     draw.line([(xPos+30, yPos-14), (230,148)], fill=prmCol, width=5)
 
-    myCircle((xPos+24, yPos-8), 2, prmCol, None, 0)
-    myCircle((xPos+36, yPos-8), 2, prmCol, None, 0)
+    Circle((xPos+24, yPos-8), 2, prmCol, None, 0)
+    Circle((xPos+36, yPos-8), 2, prmCol, None, 0)
 
-    myCircle((xPos+30, yPos-14), 2, prmCol, None, 0)
-    myCircle((xPos+30, yPos-2), 2, prmCol, None, 0)
+    Circle((xPos+30, yPos-14), 2, prmCol, None, 0)
+    Circle((xPos+30, yPos-2), 2, prmCol, None, 0)
 
     draw.line([(xPos-2, yPos-26), (222,124)], fill=prmCol, width=5)
     draw.line([(xPos+10, yPos-38), (210,136)], fill=prmCol, width=5)
 
-    myCircle((xPos-2, yPos-26), 2, prmCol, None, 0)
-    myCircle((xPos+22, yPos-26), 2, prmCol, None, 0)
+    Circle((xPos-2, yPos-26), 2, prmCol, None, 0)
+    Circle((xPos+22, yPos-26), 2, prmCol, None, 0)
 
-    myCircle((xPos+10, yPos-38), 2, prmCol, None, 0)
-    myCircle((xPos+10, yPos-14), 2, prmCol, None, 0)
+    Circle((xPos+10, yPos-38), 2, prmCol, None, 0)
+    Circle((xPos+10, yPos-14), 2, prmCol, None, 0)
     
-def myMoon(xPos, yPos):
-    myCircle((xPos, yPos), 48, sndCol, prmCol, 5)
-    myCircle((xPos+18, yPos-16), 40, bkgCol, None, 0)
+def Moon(xPos, yPos, prmCol):
+    Circle((xPos, yPos), 48, sndCol, prmCol, 5)
+    Circle((xPos+18, yPos-16), 40, bkgCol, None, 0)
 
-    myArc((xPos+18, yPos-16), 40, 47, 234, prmCol, 5)
+    Arc((xPos+18, yPos-16), 40, 47, 234, prmCol, 5)
 
-def mySunny(xPos, yPos):
-    myCircle((xPos, yPos), 32, sndCol, prmCol, 5)
+def Sunny(xPos, yPos, prmCol):
+    Circle((xPos, yPos), 32, sndCol, prmCol, 5)
     star((xPos, yPos, 64), prmCol, 22, 7, 8, 22.5)
     
-def myCloudy(xPos, yPos):
-    myCircle((xPos+20, yPos), 42, bkgCol, None, 0)
-    myCircle((xPos-32, yPos+9), 33, bkgCol, None, 0)
+def Cloudy(xPos, yPos, prmCol):
+    Circle((xPos+20, yPos), 42, bkgCol, None, 0)
+    Circle((xPos-32, yPos+9), 33, bkgCol, None, 0)
     
-    myArc((xPos+20, yPos), 42, 203, 90, prmCol, 5)
-    myArc((xPos-32, yPos+9), 33, 90, 346, prmCol, 5)
+    Arc((xPos+20, yPos), 42, 203, 90, prmCol, 5)
+    Arc((xPos-32, yPos+9), 33, 90, 346, prmCol, 5)
     draw.line([(xPos+20, yPos+41), (xPos-32, yPos+41)], fill=prmCol, width=5)
     
-    myCircle((xPos-2, yPos+1), 2, prmCol, None, 0)
+    Circle((xPos-2, yPos+1), 2, prmCol, None, 0)
     
-def myCloudWGap(xPos, yPos):
-    myArc((xPos+20, yPos), 42, 203, 90-23, prmCol, 5)
-    myArc((xPos-32, yPos+9), 33, 90+6, 346, prmCol, 5)
+def CloudWGap(xPos, yPos, prmCol):
+    Arc((xPos+20, yPos), 42, 203, 90-23, prmCol, 5)
+    Arc((xPos-32, yPos+9), 33, 90+6, 346, prmCol, 5)
     
-    myCircle((xPos-2, yPos+1), 2, prmCol, None, 0)
+    Circle((xPos-2, yPos+1), 2, prmCol, None, 0)
     
-    myCircle((xPos-35, yPos+40), 2, prmCol, None, 0)
+    Circle((xPos-35, yPos+40), 2, prmCol, None, 0)
 
-def mySmallSun(xPos, yPos):
-    myCircle((xPos-20, yPos-28), 21, sndCol, prmCol, 5)
+def SmallSun(xPos, yPos, prmCol):
+    Circle((xPos-20, yPos-28), 21, sndCol, prmCol, 5)
     star((xPos-20, yPos-28, 43), prmCol, 14, 7, 8, 22.5)
     
-def mySmallCloud(xPos, yPos):
-    myCircle((xPos+31, yPos+29), 28, bkgCol, None, 0)
-    myCircle((xPos-4, yPos+35), 22, bkgCol, None, 0)
+def SmallCloud(xPos, yPos, prmCol):
+    Circle((xPos+31, yPos+29), 28, bkgCol, None, 0)
+    Circle((xPos-4, yPos+35), 22, bkgCol, None, 0)
     draw.rectangle([(xPos-10, yPos+25), (xPos+10, yPos+70)], bkgCol, None, 0)
 
-    myArc((xPos+31, yPos+29), 28, xPos, 90, prmCol, 5)
-    myArc((xPos-4, yPos+35), 22, 90, 346, prmCol, 5)
+    Arc((xPos+31, yPos+29), 28, xPos, 90, prmCol, 5)
+    Arc((xPos-4, yPos+35), 22, 90, 346, prmCol, 5)
     draw.line([(xPos+31, yPos+56), (xPos-4, yPos+56)], fill=prmCol, width=5)
     
-def mySmallMoon(xPos, yPos):
-    myCircle((xPos-3, yPos-34), 32, sndCol, prmCol, 5)
-    myCircle((xPos+9, yPos-45), 27, bkgCol, None, 0)
+def SmallMoon(xPos, yPos, prmCol):
+    Circle((xPos-3, yPos-34), 32, sndCol, prmCol, 5)
+    Circle((xPos+9, yPos-45), 27, bkgCol, None, 0)
 
-    myArc((xPos+9, yPos-45), 27, 46, 230, prmCol, 5)
+    Arc((xPos+9, yPos-45), 27, 46, 230, prmCol, 5)
 
-def myPartlySunny(xPos, yPos):
-    mySunny(xPos, yPos)
-    mySmallCloud(xPos, yPos)
+def PartlySunny(xPos, yPos):
+    Sunny(xPos, yPos)
+    SmallCloud(xPos, yPos)
     
-def myPartlyCloudy(xPos, yPos):
-    mySmallSun(xPos, yPos)
-    myCloudy(xPos, yPos)
+def PartlyCloudy(xPos, yPos):
+    SmallSun(xPos, yPos)
+    Cloudy(xPos, yPos)
 
-def myClearNight(xPos, yPos):
-    myMoon(xPos, yPos)
-    myStars(xPos, yPos)
+def ClearNight(xPos, yPos):
+    Moon(xPos, yPos)
+    Stars(xPos, yPos)
 
-def myMostlyClearNight(xPos, yPos):
-    myMoon(xPos, yPos)
-    mySmallCloud(xPos, yPos)
+def MostlyClearNight(xPos, yPos):
+    Moon(xPos, yPos)
+    SmallCloud(xPos, yPos)
     
-def myMostlyCloudyNight(xPos, yPos):
-    mySmallMoon(xPos, yPos)
-    myCloudy(xPos, yPos)
+def MostlyCloudyNight(xPos, yPos):
+    SmallMoon(xPos, yPos)
+    Cloudy(xPos, yPos)
     
-def myRaining(xPos, yPos):
-    myCloudWGap(xPos, yPos)
+def Raining(xPos, yPos, PrmCol):
+    CloudWGap(xPos, yPos)
     
     draw.line([(xPos-16, yPos+30), (xPos-32, yPos+58)], fill=prmCol, width=5)	#line1
     draw.line([(xPos-2, yPos+30), (xPos-22, yPos+65)], fill=prmCol, width=5)	#line2
     draw.line([(xPos+12, yPos+30), (xPos-4, yPos+58)], fill=prmCol, width=5)	#line3
     draw.line([(xPos+26, yPos+30), (xPos-2, yPos+79)], fill=prmCol, width=5)	#line4
     
-    myCircle((xPos-16, yPos+30), 2, prmCol, None, 0), myCircle((xPos-32, yPos+58), 2, prmCol, None, 0)
-    myCircle((xPos-2, yPos+30), 2, prmCol, None, 0), myCircle((xPos-22, yPos+65), 2, prmCol, None, 0)
-    myCircle((xPos+12, yPos+30), 2, prmCol, None, 0), myCircle((xPos-4, yPos+58), 2, prmCol, None, 0)
-    myCircle((xPos+26, yPos+30), 2, prmCol, None, 0), myCircle((xPos-2, yPos+79), 2, prmCol, None, 0)
+    Circle((xPos-16, yPos+30), 2, prmCol, None, 0), Circle((xPos-32, yPos+58), 2, prmCol, None, 0)
+    Circle((xPos-2, yPos+30), 2, prmCol, None, 0), Circle((xPos-22, yPos+65), 2, prmCol, None, 0)
+    Circle((xPos+12, yPos+30), 2, prmCol, None, 0), Circle((xPos-4, yPos+58), 2, prmCol, None, 0)
+    Circle((xPos+26, yPos+30), 2, prmCol, None, 0), Circle((xPos-2, yPos+79), 2, prmCol, None, 0)
     
-def myDrizzle(xPos, yPos):
-    myCloudWGap(xPos, yPos)
+def Drizzle(xPos, yPos, prmCol):
+    CloudWGap(xPos, yPos)
     # Rule is x-4 for y+7 to move down
     
     draw.line([(xPos-20, yPos+37), (xPos-28, yPos+51)], fill=prmCol, width=5)	#line1
@@ -223,9 +223,9 @@ def myDrizzle(xPos, yPos):
     draw.line([(xPos+26, yPos+30), (xPos+18, yPos+44)], fill=prmCol, width=5)	#line4
     draw.line([(xPos+6, yPos+65), (xPos-2, yPos+79)], fill=prmCol, width=5)		#line4b
     
-    myCircle((xPos-20, yPos+37), 2, prmCol, None, 0), myCircle((xPos-28, yPos+51), 2, prmCol, None, 0)
-    myCircle((xPos+2, yPos+23), 2, prmCol, None, 0), myCircle((xPos-6, yPos+37), 2, prmCol, None, 0)
-    myCircle((xPos-18, yPos+58), 2, prmCol, None, 0), myCircle((xPos-26, yPos+72), 2, prmCol, None, 0)
-    myCircle((xPos+4, yPos+44), 2, prmCol, None, 0), myCircle((xPos-4, yPos+58), 2, prmCol, None, 0)
-    myCircle((xPos+26, yPos+30), 2, prmCol, None, 0), myCircle((xPos+18, yPos+44), 2, prmCol, None, 0)
-    myCircle((xPos+6, yPos+65), 2, prmCol, None, 0), myCircle((xPos-2, yPos+79), 2, prmCol, None, 0)
+    Circle((xPos-20, yPos+37), 2, prmCol, None, 0), Circle((xPos-28, yPos+51), 2, prmCol, None, 0)
+    Circle((xPos+2, yPos+23), 2, prmCol, None, 0), Circle((xPos-6, yPos+37), 2, prmCol, None, 0)
+    Circle((xPos-18, yPos+58), 2, prmCol, None, 0), Circle((xPos-26, yPos+72), 2, prmCol, None, 0)
+    Circle((xPos+4, yPos+44), 2, prmCol, None, 0), Circle((xPos-4, yPos+58), 2, prmCol, None, 0)
+    Circle((xPos+26, yPos+30), 2, prmCol, None, 0), Circle((xPos+18, yPos+44), 2, prmCol, None, 0)
+    Circle((xPos+6, yPos+65), 2, prmCol, None, 0), Circle((xPos-2, yPos+79), 2, prmCol, None, 0)
