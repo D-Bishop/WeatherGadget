@@ -25,6 +25,7 @@ def display_weather(wd):
         bkgCol = inky_display.WHITE
         prmCol = inky_display.BLACK
         sndCol = inky_display.YELLOW
+        colors = [bkgCol, prmCol, sndCol]  # palette indices to make it easier to pass colors to routines
 
     else:
         # this lets us work on a desktop machine
@@ -36,10 +37,9 @@ def display_weather(wd):
         bkgCol = 0
         prmCol = 1
         sndCol = 2
+        colors = [bkgCol, prmCol, sndCol]  # palette indices to make it easier to pass colors to routines
 
     draw = ImageDraw.Draw(img)
-
-    #myCircle((200, 150), 96, None, prmCol, 1)
 
     # for debugging
     p = 0  # period
@@ -47,15 +47,15 @@ def display_weather(wd):
     forecast = re.search(".*[day|night]\/(\w*)", wd['properties']['periods'][p]['icon']).group(1)
     # See: https://api.weather.gov/icons
     if forecast == "skc" or forecast == "few":
-        weather_icons.Sunny(200, 150)
+        weather_icons.Sunny(draw, 200, 150, colors)
     elif forecast == "sct":
-        weather_icons.PartlySunny(200, 150)
+        weather_icons.PartlySunny(draw, 200, 150, colors)
     elif forecast == "bkn":
-        weather_icons.PartlyCloudy(200, 150)
+        weather_icons.PartlyCloudy(draw, 200, 150, colors)
     elif forecast == "ovc":
-        weather_icons.Cloudy(200, 150)
+        weather_icons.Cloudy(draw, 200, 150, colors)
     elif forecast =="rain_showers":
-        weather_icons.Raining(200, 150)
+        weather_icons.Raining(draw, 200, 150, colors)
 
     # from font_fredoka_one import FredokaOne
     # font = ImageFont.truetype(FredokaOne, 36)
@@ -71,16 +71,8 @@ def display_weather(wd):
         inky_display.set_image(flipped)
         inky_display.show()
     else:
-        # try scaling
-        img_quarter = img.resize((200,150))
-        for i in range(0, 2):
-            for j in range(0, 2):
-                img.paste(img_quarter, (200*i,150*j))
-        
-        img.convert("RGB").show()  # preview on PC display
-    img.convert("RGB").show()  # preview on PC display
-
+        img.convert(mode = "RGB").show()  # preview on PC display
 
 if __name__ == "__main__":
-	wd = weather.get_weather()
-	display_weather(wd)
+    wd = weather.get_weather()
+    display_weather(wd)

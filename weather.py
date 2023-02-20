@@ -37,4 +37,4 @@ def print_weather(weather_dict, days):
 if __name__ == "__main__":
     # if run directly, print one day
     wd = get_weather()
-    print_weather(wd, 2)
+    print_weather(wd, 1)
