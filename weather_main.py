@@ -57,14 +57,13 @@ def display_weather(wd):
     elif forecast =="rain_showers":
         weather_icons.Raining(draw, 200, 150, colors)
 
-    # from font_fredoka_one import FredokaOne
-    # font = ImageFont.truetype(FredokaOne, 36)
+    from font_fredoka_one import FredokaOne
+    font = ImageFont.truetype(FredokaOne, 12)
 
     # draw today's temp & forecast
-    #draw.text((195, 100), str(wd['properties']['periods'][0]['temperature']), fill=prmCol, align='center', font=font)
-    draw.text((50, 35), wd['properties']['periods'][p]['name'], fill=prmCol)
-    draw.text((50, 50), str(wd['properties']['periods'][p]['temperature']), fill=prmCol, align='center')  # without font choice
-    draw.text((70, 50), wd['properties']['periods'][p]['shortForecast'], fill=prmCol)
+    draw.text((50, 35), wd['properties']['periods'][p]['name'], fill=prmCol, font = font)
+    draw.text((50, 50), str(wd['properties']['periods'][p]['temperature']), fill=prmCol, align='center', font = font)  # without font choice
+    draw.text((70, 50), wd['properties']['periods'][p]['shortForecast'], fill=prmCol, font = font)
 
     if platform.system() == 'Linux':
         flipped = img.rotate(180)
