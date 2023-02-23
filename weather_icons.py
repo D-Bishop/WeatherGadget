@@ -8,6 +8,27 @@ from PIL import Image, ImageFont, ImageDraw
 import math
 import numbers
 
+class WeatherImage():
+    def __init__(self):
+        self.img = Image.new("P", (400,300))
+        cW = [255, 255, 255]
+        cB = [0, 0, 0]
+        cY = [255, 255, 0]
+        self.img.putpalette(cW + cB + cY)
+        self.draw = ImageDraw.Draw(self.img)
+        self.BLACK = 0
+        bkgCol = 0
+        prmCol = 1
+        sndCol = 2
+    def cloud(self, xPos, yPos):
+        self.draw.line([(xPos+6, yPos+65), (xPos-2, yPos+79)], fill=self.BLACK, width=5)
+    def show(self):
+        self.img.convert(mode = "RGB").show()
+
+wi = WeatherImage()
+wi.cloud(200, 150)
+wi.show()
+
 def _compute_regular_polygon_vertices(bounding_circle, n_sides, rotation):
     # 1. Error Handling
     # 1.1 Check `n_sides` has an appropriate value
@@ -229,3 +250,4 @@ def Drizzle(draw, xPos, yPos, colors):
     Circle(draw, (xPos+4, yPos+44), 2, colors[1], None, 0), Circle(draw, (xPos-4, yPos+58), 2, colors[1], None, 0)
     Circle(draw, (xPos+26, yPos+30), 2, colors[1], None, 0), Circle(draw, (xPos+18, yPos+44), 2, colors[1], None, 0)
     Circle(draw, (xPos+6, yPos+65), 2, colors[1], None, 0), Circle(draw, (xPos-2, yPos+79), 2, colors[1], None, 0)
+
