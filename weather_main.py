@@ -46,24 +46,30 @@ def display_weather(wd):
 
     forecast = re.search(".*[day|night]\/(\w*)", wd['properties']['periods'][p]['icon']).group(1)
     # See: https://api.weather.gov/icons
-    if forecast == "skc" or forecast == "few":
-        weather_icons.Sunny(draw, 200, 150, colors)
-    elif forecast == "sct":
-        weather_icons.PartlySunny(draw, 200, 150, colors)
-    elif forecast == "bkn":
-        weather_icons.PartlyCloudy(draw, 200, 150, colors)
-    elif forecast == "ovc":
-        weather_icons.Cloudy(draw, 200, 150, colors)
+    
+    isDayTime = str(wd['properties']['periods'][p]['isDaytime'])
+    
+    if forecast == "skc" or forecast == "wind_skc":
+        weather_icons.Clear(draw, 200, 150, colors, isDaytime)
+    elif forecast == "few" or forecast == "sct" or forecast == "wind_few" or forecast == "wind_sct":
+        weather_icons.SemiCloudy(draw, 200, 150, colors, isDayTime)
+    elif forecast == "bkn" or forecast == "wind_bkn":
+        weather_icons.MostlyCloudy(draw, 200, 150, colors, isDayTime)
+    elif forecast == "ovc" or forecast == "wind_ovc":
+        weather_icons.Overcast(draw, 200, 150, colors)
     elif forecast =="rain_showers":
-        weather_icons.Raining(draw, 200, 150, colors)
-
-    from font_fredoka_one import FredokaOne
-    font = ImageFont.truetype(FredokaOne, 12)
+        weather_icons.Showers(draw, 200, 150, colors)
+    elif forecast =="rain":
+        weather_icons.Rain(draw, 200, 150, colors)
 
     # draw today's temp & forecast
-    draw.text((50, 35), wd['properties']['periods'][p]['name'], fill=prmCol, font = font)
-    draw.text((50, 50), str(wd['properties']['periods'][p]['temperature']), fill=prmCol, align='center', font = font)  # without font choice
-    draw.text((70, 50), wd['properties']['periods'][p]['shortForecast'], fill=prmCol, font = font)
+    draw.text((50, 35), wd['properties']['periods'][p]['name'], fill=prmCol)
+    draw.text((50, 50), str(wd['properties']['periods'][p]['temperature']), fill=prmCol, align='center')
+    draw.text((70, 50), wd['properties']['periods'][p]['shortForecast'], fill=prmCol)
+    
+    # Draw over code for icon sketching
+    draw.rectangle([(0, 0), (400, 300)], colors[0], None, 0)
+    weather_icons.New(draw, 200, 150, colors)
 
     if platform.system() == 'Linux':
         flipped = img.rotate(180)
@@ -75,3 +81,5 @@ def display_weather(wd):
 if __name__ == "__main__":
     wd = weather.get_weather()
     display_weather(wd)
+    # weather.print_weather(wd, 2)
+    

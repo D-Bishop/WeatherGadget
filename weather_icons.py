@@ -20,14 +20,17 @@ class WeatherImage():
         bkgCol = 0
         prmCol = 1
         sndCol = 2
+        
+    # TODO Was this for the demo below?
     def cloud(self, xPos, yPos):
         self.draw.line([(xPos+6, yPos+65), (xPos-2, yPos+79)], fill=self.BLACK, width=5)
     def show(self):
         self.img.convert(mode = "RGB").show()
 
-wi = WeatherImage()
-wi.cloud(200, 150)
-wi.show()
+# Example code for ObjectOriented Demo for Marin
+# wi = WeatherImage()
+# wi.cloud(200, 150)
+# wi.show()
 
 def _compute_regular_polygon_vertices(bounding_circle, n_sides, rotation):
     # 1. Error Handling
@@ -159,19 +162,9 @@ def Moon(draw, xPos, yPos, colors):
 
     Arc(draw, (xPos+18, yPos-16), 40, 47, 234, colors[1], 5)
 
-def Sunny(draw, xPos, yPos, colors):
+def Sun(draw, xPos, yPos, colors):
     Circle(draw, (xPos, yPos), 32, colors[2], colors[1], 5)
     star(draw, (xPos, yPos, 64), colors[1], 22, 7, 8, 22.5)
-    
-def Cloudy(draw, xPos, yPos, colors):
-    Circle(draw, (xPos+20, yPos), 42, colors[0], None, 0)
-    Circle(draw, (xPos-32, yPos+9), 33, colors[0], None, 0)
-    
-    Arc(draw, (xPos+20, yPos), 42, 203, 90, colors[1], 5)
-    Arc(draw, (xPos-32, yPos+9), 33, 90, 346, colors[1], 5)
-    draw.line([(xPos+20, yPos+41), (xPos-32, yPos+41)], fill=colors[1], width=5)
-    
-    Circle(draw, (xPos-2, yPos+1), 2, colors[1], None, 0)
     
 def CloudWGap(draw, xPos, yPos, colors):
     Arc(draw, (xPos+20, yPos), 42, 203, 90-23, colors[1], 5)
@@ -190,37 +183,51 @@ def SmallCloud(draw, xPos, yPos, colors):
     Circle(draw, (xPos-4, yPos+35), 22, colors[0], None, 0)
     draw.rectangle([(xPos-10, yPos+25), (xPos+10, yPos+70)], colors[0], None, 0)
 
-    Arc(draw, (xPos+31, yPos+29), 28, xPos, 90, colors, 5)
-    Arc(draw, (xPos-4, yPos+35), 22, 90, 346, colors, 5)
+    Arc(draw, (xPos+31, yPos+29), 28, xPos, 90, colors[0], 5)
+    Arc(draw, (xPos-4, yPos+35), 22, 90, 346, colors[0], 5)
     draw.line([(xPos+31, yPos+56), (xPos-4, yPos+56)], fill=colors[1], width=5)
     
 def SmallMoon(draw, xPos, yPos, colors):
     Circle(draw, (xPos-3, yPos-34), 32, colors[2], colors[1], 5)
     Circle(draw, (xPos+9, yPos-45), 27, colors[0], None, 0)
 
-    Arc((xPos+9, yPos-45), 27, 46, 230, colors[1], 5)
+    Arc(draw, (xPos+9, yPos-45), 27, 46, 230, colors[1], 5)
 
-def PartlySunny(draw, xPos, yPos):
-    Sunny(draw, xPos, yPos, colors)
+
+def Overcast(draw, xPos, yPos, colors):
+    Circle(draw, (xPos+20, yPos), 42, colors[0], None, 0)
+    Circle(draw, (xPos-32, yPos+9), 33, colors[0], None, 0)
+    
+    Arc(draw, (xPos+20, yPos), 42, 203, 90, colors[1], 5)
+    Arc(draw, (xPos-32, yPos+9), 33, 90, 346, colors[1], 5)
+    draw.line([(xPos+20, yPos+41), (xPos-32, yPos+41)], fill=colors[1], width=5)
+    
+    Circle(draw, (xPos-2, yPos+1), 2, colors[1], None, 0)
+    
+def Clear(draw, xPos, yPos, colors, isDaytime):
+    if isDaytime:
+        Sun(draw, xPos, yPos, colors)
+    else:
+        Moon(draw, xPos, yPos, colors)
+        Stars(draw, xPos, yPos, colors)
+        
+def SemiCloudy(draw, xPos, yPos, colors, isDaytime):
+    if isDaytime:
+        Sun(draw, xPos, yPos, colors)
+    else:
+        Moon(draw, xPos, yPos, colors)
+    
     SmallCloud(draw, xPos, yPos, colors)
     
-def PartlyCloudy(draw, xPos, yPos):
-    SmallSun(draw, xPos, yPos, colors)
-    Cloudy(draw, xPos, yPos, colors)
-
-def ClearNight(draw, xPos, yPos):
-    Moon(draw, xPos, yPos, colors)
-    Stars(draw, xPos, yPos, colors)
-
-def MostlyClearNight(draw, xPos, yPos):
-    Moon(draw, xPos, yPos, colors)
-    SmallCloud(draw, xPos, yPos, colors)
+def MostlyCloudy(draw, xPos, yPos, colors, isDaytime):
+    if isDaytime:
+        SmallSun(draw, xPos, yPos, colors)
+    else:
+        SmallMoon(draw, xPos, yPos, colors)
     
-def MostlyCloudyNight(draw, xPos, yPos):
-    SmallMoon(draw, xPos, yPos, colors)
-    Cloudy(draw, xPos, yPos, colors)
+    Overcast(draw, xPos, yPos, colors)
     
-def Raining(draw, xPos, yPos, colors):
+def Showers(draw, xPos, yPos, colors):
     CloudWGap(draw, xPos, yPos, colors)
     
     draw.line([(xPos-16, yPos+30), (xPos-32, yPos+58)], fill=colors[1], width=5)  #line1
@@ -233,8 +240,8 @@ def Raining(draw, xPos, yPos, colors):
     Circle(draw, (xPos+12, yPos+30), 2, colors[1], None, 0), Circle(draw, (xPos-4, yPos+58), 2, colors[1], None, 0)
     Circle(draw, (xPos+26, yPos+30), 2, colors[1], None, 0), Circle(draw, (xPos-2, yPos+79), 2, colors[1], None, 0)
     
-def Drizzle(draw, xPos, yPos, colors):
-    CloudWGap(draw, xPos, yPos)
+def Rain(draw, xPos, yPos, colors):
+    CloudWGap(draw, xPos, yPos, colors)
     # Rule is x-4 for y+7 to move down
     
     draw.line([(xPos-20, yPos+37), (xPos-28, yPos+51)], fill=colors[1], width=5)	#line1
@@ -250,4 +257,21 @@ def Drizzle(draw, xPos, yPos, colors):
     Circle(draw, (xPos+4, yPos+44), 2, colors[1], None, 0), Circle(draw, (xPos-4, yPos+58), 2, colors[1], None, 0)
     Circle(draw, (xPos+26, yPos+30), 2, colors[1], None, 0), Circle(draw, (xPos+18, yPos+44), 2, colors[1], None, 0)
     Circle(draw, (xPos+6, yPos+65), 2, colors[1], None, 0), Circle(draw, (xPos-2, yPos+79), 2, colors[1], None, 0)
+    
+def New(draw, xPos, yPos, colors):
+    CloudWGap(draw, xPos, yPos, colors)
+    
+    draw.line([(xPos-12, yPos+23), (xPos-24, yPos+44)], fill=colors[1], width=5)	#line1
+    draw.line([(xPos-7, yPos+51), (xPos-19, yPos+72)], fill=colors[1], width=5)     #line2
+    draw.line([(xPos+22, yPos+37), (xPos+10, yPos+58)], fill=colors[1], width=5)    #line3
+    
+    draw.line([(xPos-7+4+4+4, yPos+51-7-7-7), (xPos-19+4+4+4+4+4, yPos+72-7-7-7-7-7)], fill=colors[1], width=5)
+    
+    Circle(draw, (xPos-7+4+4-7, yPos+51-7-7-4-4), 2, colors[1], None, 0)
+    Circle(draw, (xPos-7+4+4+7+7, yPos+51-7-7+4), 2, colors[1], None, 0)
+    
+    Circle(draw, (xPos-19+4+4+4+4+4, yPos+72-7-7-7-7-7), 2, colors[1], None, 0)
+    Circle(draw, (xPos-7+4+4+4, yPos+51-7-7-7), 2, colors[1], None, 0)
+    
+    Circle(draw, (xPos-7, yPos+51), 2, colors[1], None, 0)
 
