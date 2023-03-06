@@ -265,13 +265,14 @@ def New(draw, xPos, yPos, colors):
     draw.line([(xPos-7, yPos+51), (xPos-19, yPos+72)], fill=colors[1], width=5)     #line2
     draw.line([(xPos+22, yPos+37), (xPos+10, yPos+58)], fill=colors[1], width=5)    #line3
     
-    draw.line([(xPos-7+4+4+4, yPos+51-7-7-7), (xPos-19+4+4+4+4+4, yPos+72-7-7-7-7-7)], fill=colors[1], width=5)
+    draw.line([(xPos+5, yPos+30), (xPos-3, yPos+44)], fill=colors[1], width=5)
+    draw.line([(xPos+8, yPos+41), (xPos-7+4+4-7, yPos+51-7-7-4-4+1+1+1+1)], fill=colors[1], width=5)
     
-    Circle(draw, (xPos-7+4+4-7, yPos+51-7-7-4-4), 2, colors[1], None, 0)
-    Circle(draw, (xPos-7+4+4+7+7, yPos+51-7-7+4), 2, colors[1], None, 0)
+    # Circle(draw, (xPos-7+4+4-7, yPos+51-7-7-4-4+1+1+1+1), 2, colors[1], None, 0)
+    # Circle(draw, (xPos-7+4+4+7, yPos+51-7-7+1+1+1+1), 2, colors[1], None, 0)
     
-    Circle(draw, (xPos-19+4+4+4+4+4, yPos+72-7-7-7-7-7), 2, colors[1], None, 0)
-    Circle(draw, (xPos-7+4+4+4, yPos+51-7-7-7), 2, colors[1], None, 0)
+    # Circle(draw, (xPos-19+4+4+4+4, yPos+72-7-7-7-7), 2, colors[1], None, 0)
+    # Circle(draw, (xPos-7+4+4+4, yPos+51-7-7-7), 2, colors[1], None, 0)
     
     Circle(draw, (xPos-7, yPos+51), 2, colors[1], None, 0)
 
