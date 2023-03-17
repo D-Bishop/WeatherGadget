@@ -10,6 +10,8 @@ import numbers
 
 class WeatherImage():
     def __init__(self):
+        # this needs the if statements to choose between Pi & desktop machines
+        # that is: if platform.system() == 'Linux': etc., etc.
         self.img = Image.new("P", (400,300))
         cW = [255, 255, 255]
         cB = [0, 0, 0]
