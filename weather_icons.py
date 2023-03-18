@@ -260,9 +260,8 @@ def Rain(draw, xPos, yPos, colors):
     Circle(draw, (xPos+26, yPos+30), 2, colors[1], None, 0), Circle(draw, (xPos+18, yPos+44), 2, colors[1], None, 0)
     Circle(draw, (xPos+6, yPos+65), 2, colors[1], None, 0), Circle(draw, (xPos-2, yPos+79), 2, colors[1], None, 0)
     
-def TOBENAMED(draw, xPos, yPos, colors):
+def RainSnow(draw, xPos, yPos, colors):
     CloudWGap(draw, xPos, yPos, colors)
-    # Rule is x-4 for y+7 to move down
     
     draw.line([(xPos-12, yPos+23), (xPos-20, yPos+37)], fill=colors[1], width=5)	#line1
     draw.line([(xPos-11, yPos+58), (xPos-19, yPos+72)], fill=colors[1], width=5)    #line5
@@ -290,9 +289,8 @@ def TOBENAMED(draw, xPos, yPos, colors):
     Circle(draw, (xPos+6, yPos+65), 2, colors[1], None, 0), Circle(draw, (xPos-2, yPos+79), 2, colors[1], None, 0)
     Circle(draw, (xPos+9, yPos+76), 2, colors[1], None, 0), Circle(draw, (xPos-5, yPos+68), 2, colors[1], None, 0)
 
-def ALSOTOBENAMED(draw, xPos, yPos, colors):
+def Sleet(draw, xPos, yPos, colors):
     CloudWGap(draw, xPos, yPos, colors)
-    # Rule is x-4 for y+7 to move down
     
     draw.line([(xPos-12, yPos+23), (xPos-28, yPos+51)], fill=colors[1], width=5)	#line1
     draw.line([(xPos+5, yPos+30), (xPos+1, yPos+37)], fill=colors[1], width=5)      #line2
@@ -309,9 +307,8 @@ def ALSOTOBENAMED(draw, xPos, yPos, colors):
     Circle(draw, (xPos+22, yPos+37), 2, colors[1], None, 0), Circle(draw, (xPos+10, yPos+58), 2, colors[1], None, 0)
     Circle(draw, (xPos-15, yPos+65), 2, colors[1], None, 0), Circle(draw, (xPos-23, yPos+79), 2, colors[1], None, 0)
     
-def ALSOALSOTOBENAMED(draw, xPos, yPos, colors):
+def Snow(draw, xPos, yPos, colors):
     CloudWGap(draw, xPos, yPos, colors)
-    # Rule is x-4 for y+7 to move down
     
     draw.line([(xPos-9, yPos+29), (xPos-17, yPos+43)], fill=colors[1], width=5)     #line1
     draw.line([(xPos-6, yPos+40), (xPos-20, yPos+32)], fill=colors[1], width=5)     #cross1
@@ -334,11 +331,45 @@ def ALSOALSOTOBENAMED(draw, xPos, yPos, colors):
     Circle(draw, (xPos+3, yPos+57), 2, colors[1], None, 0), Circle(draw, (xPos-5, yPos+71), 2, colors[1], None, 0)
     Circle(draw, (xPos+6, yPos+68), 2, colors[1], None, 0), Circle(draw, (xPos-8, yPos+60), 2, colors[1], None, 0)
 
-def New(draw, xPos, yPos, colors):
+def ThunderStorm(draw, xPos, yPos, colors):
     CloudWGap(draw, xPos, yPos, colors)
     
-    draw.line([(xPos-30, yPos+27), (xPos-9, yPos+55)], fill=colors[1], width=5)
+    draw.line([(xPos-30, yPos+52), (xPos-9, yPos+52)], fill=colors[2], width=5)     #horiz1
     
-    draw.line([(xPos-30, yPos+55), (xPos-9, yPos+55)], fill=colors[1], width=5)
-    draw.line([(xPos+7, yPos+55), (xPos+32, yPos+55)], fill=colors[1], width=5)
+    draw.line([(xPos-30, yPos+27), (xPos-9, yPos+52)], fill=colors[2], width=5)     #diag1
+    draw.line([(xPos-30, yPos+52), (xPos-9, yPos+77)], fill=colors[2], width=5)     #diag2
+    
+    draw.line([(xPos+7, yPos+52), (xPos+32, yPos+52)], fill=colors[2], width=5)     #horiz2
+    
+    draw.line([(xPos+7, yPos+22), (xPos+32, yPos+52)], fill=colors[2], width=5)     #diag3
+    draw.line([(xPos+7, yPos+52), (xPos+32, yPos+82)], fill=colors[2], width=5)     #diag4
+    
+    
+    Circle(draw, (xPos-30, yPos+52), 2, colors[2], None, 0), Circle(draw, (xPos-9, yPos+52), 2, colors[2], None, 0)
+    Circle(draw, (xPos+7, yPos+52), 2, colors[2], None, 0), Circle(draw, (xPos+32, yPos+52), 2, colors[2], None, 0)
+    
+    Circle(draw, (xPos-30, yPos+27), 2, colors[2], None, 0), Circle(draw, (xPos-9, yPos+77), 2, colors[2], None, 0)
+    Circle(draw, (xPos+7, yPos+22), 2, colors[2], None, 0), Circle(draw, (xPos+32, yPos+82), 2, colors[2], None, 0)
+    
+def Particulate(draw, xPos, yPos, colors):
+    draw.line([(xPos-50, yPos-46), (xPos+50, yPos-46)], fill=colors[1], width=5)
+    draw.line([(xPos-80, yPos-23), (xPos-35, yPos-23)], fill=colors[1], width=5), draw.line([(xPos-10, yPos-23), (xPos+80, yPos-23)], fill=colors[1], width=5)
+    draw.line([(xPos-80, yPos), (xPos+80, yPos)], fill=colors[1], width=5)
+    draw.line([(xPos-80, yPos+23), (xPos+10, yPos+23)], fill=colors[1], width=5), draw.line([(xPos+35, yPos+23), (xPos+80, yPos+23)], fill=colors[1], width=5)
+    draw.line([(xPos-50, yPos+46), (xPos+50, yPos+46)], fill=colors[1], width=5)
+    
+    Circle(draw, (xPos-50, yPos-46), 2, colors[1], None, 0), Circle(draw, (xPos+50, yPos-46), 2, colors[1], None, 0)
+    Circle(draw, (xPos-80, yPos-23), 2, colors[1], None, 0), Circle(draw, (xPos-35, yPos-23), 2, colors[1], None, 0)
+    Circle(draw, (xPos-10, yPos-23), 2, colors[1], None, 0), Circle(draw, (xPos+80, yPos-23), 2, colors[1], None, 0)
+    Circle(draw, (xPos-80, yPos), 2, colors[1], None, 0), Circle(draw, (xPos+80, yPos), 2, colors[1], None, 0)
+    Circle(draw, (xPos-80, yPos+23), 2, colors[1], None, 0), Circle(draw, (xPos+10, yPos+23), 2, colors[1], None, 0)
+    Circle(draw, (xPos+35, yPos+23), 2, colors[1], None, 0), Circle(draw, (xPos+80, yPos+23), 2, colors[1], None, 0)
+    Circle(draw, (xPos-50, yPos+46), 2, colors[1], None, 0), Circle(draw, (xPos+50, yPos+46), 2, colors[1], None, 0)
+
+def Tornado(draw, xPos, yPos, colors):
+    draw.ellipse([(xPos-75, yPos-50), (xPos+75, yPos-20)], outline=colors[1], width=5)
+    draw.arc([(xPos-39, yPos), (xPos+60, yPos+18)], 340, 200, fill=colors[1], width=5)
+    draw.arc([(xPos-37, yPos+38), (xPos+17, yPos+49)], 340, 200, fill=colors[1], width=5)
+    
+    Circle(draw, (xPos, yPos+74), 4, colors[1], None, 0)
     

@@ -69,7 +69,7 @@ def display_weather(wd):
     
     # Draw over code for icon sketching
     draw.rectangle([(0, 0), (400, 300)], colors[0], None, 0)
-    weather_icons.New(draw, 200, 150, colors)
+    weather_icons.Tornado(draw, 200, 150, colors)
 
     if platform.system() == 'Linux':
         flipped = img.rotate(180)
