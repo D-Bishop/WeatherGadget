@@ -260,21 +260,85 @@ def Rain(draw, xPos, yPos, colors):
     Circle(draw, (xPos+26, yPos+30), 2, colors[1], None, 0), Circle(draw, (xPos+18, yPos+44), 2, colors[1], None, 0)
     Circle(draw, (xPos+6, yPos+65), 2, colors[1], None, 0), Circle(draw, (xPos-2, yPos+79), 2, colors[1], None, 0)
     
+def TOBENAMED(draw, xPos, yPos, colors):
+    CloudWGap(draw, xPos, yPos, colors)
+    # Rule is x-4 for y+7 to move down
+    
+    draw.line([(xPos-12, yPos+23), (xPos-20, yPos+37)], fill=colors[1], width=5)	#line1
+    draw.line([(xPos-11, yPos+58), (xPos-19, yPos+72)], fill=colors[1], width=5)    #line5
+    draw.line([(xPos+22, yPos+37), (xPos+14, yPos+51)], fill=colors[1], width=5)    #line3
+    
+    draw.line([(xPos+5, yPos+30), (xPos-3, yPos+44)], fill=colors[1], width=5)      #line2
+    draw.line([(xPos+8, yPos+41), (xPos-6, yPos+33)], fill=colors[1], width=5)      #cross1
+    
+    draw.line([(xPos-28, yPos+51), (xPos-36, yPos+65)], fill=colors[1], width=5)	#line4
+    draw.line([(xPos-25, yPos+62), (xPos-39, yPos+54)], fill=colors[1], width=5)    #cross2
+    
+    draw.line([(xPos+6, yPos+65), (xPos-2, yPos+79)], fill=colors[1], width=5)      #line6
+    draw.line([(xPos+9, yPos+76), (xPos-5, yPos+68)], fill=colors[1], width=5)      #cross3
+    
+    Circle(draw, (xPos-12, yPos+23), 2, colors[1], None, 0), Circle(draw, (xPos-20, yPos+37), 2, colors[1], None, 0)
+    Circle(draw, (xPos-11, yPos+58), 2, colors[1], None, 0), Circle(draw, (xPos-19, yPos+72), 2, colors[1], None, 0)
+    Circle(draw, (xPos+22, yPos+37), 2, colors[1], None, 0), Circle(draw, (xPos+14, yPos+51), 2, colors[1], None, 0)
+    
+    Circle(draw, (xPos+5, yPos+30), 2, colors[1], None, 0), Circle(draw, (xPos-3, yPos+44), 2, colors[1], None, 0)
+    Circle(draw, (xPos+8, yPos+41), 2, colors[1], None, 0), Circle(draw, (xPos-6, yPos+33), 2, colors[1], None, 0)
+    
+    Circle(draw, (xPos-28, yPos+51), 2, colors[1], None, 0), Circle(draw, (xPos-36, yPos+65), 2, colors[1], None, 0)
+    Circle(draw, (xPos-25, yPos+62), 2, colors[1], None, 0), Circle(draw, (xPos-39, yPos+54), 2, colors[1], None, 0)
+    
+    Circle(draw, (xPos+6, yPos+65), 2, colors[1], None, 0), Circle(draw, (xPos-2, yPos+79), 2, colors[1], None, 0)
+    Circle(draw, (xPos+9, yPos+76), 2, colors[1], None, 0), Circle(draw, (xPos-5, yPos+68), 2, colors[1], None, 0)
+
+def ALSOTOBENAMED(draw, xPos, yPos, colors):
+    CloudWGap(draw, xPos, yPos, colors)
+    # Rule is x-4 for y+7 to move down
+    
+    draw.line([(xPos-12, yPos+23), (xPos-28, yPos+51)], fill=colors[1], width=5)	#line1
+    draw.line([(xPos+5, yPos+30), (xPos+1, yPos+37)], fill=colors[1], width=5)      #line2
+    draw.line([(xPos+22, yPos+37), (xPos+10, yPos+58)], fill=colors[1], width=5)    #line3
+    draw.line([(xPos-15, yPos+65), (xPos-23, yPos+79)], fill=colors[1], width=5)    #line4
+    
+    Circle(draw, (xPos-7, yPos+51), 4, colors[1], None, 0)
+    Circle(draw, (xPos-36, yPos+65), 4, colors[1], None, 0)
+    Circle(draw, (xPos-31, yPos+93), 4, colors[1], None, 0)
+    Circle(draw, (xPos+2, yPos+72), 4, colors[1], None, 0)
+    
+    Circle(draw, (xPos-12, yPos+23), 2, colors[1], None, 0), Circle(draw, (xPos-28, yPos+51), 2, colors[1], None, 0)
+    Circle(draw, (xPos+5, yPos+30), 2, colors[1], None, 0), Circle(draw, (xPos+1, yPos+37), 2, colors[1], None, 0)
+    Circle(draw, (xPos+22, yPos+37), 2, colors[1], None, 0), Circle(draw, (xPos+10, yPos+58), 2, colors[1], None, 0)
+    Circle(draw, (xPos-15, yPos+65), 2, colors[1], None, 0), Circle(draw, (xPos-23, yPos+79), 2, colors[1], None, 0)
+    
+def ALSOALSOTOBENAMED(draw, xPos, yPos, colors):
+    CloudWGap(draw, xPos, yPos, colors)
+    # Rule is x-4 for y+7 to move down
+    
+    draw.line([(xPos-9, yPos+29), (xPos-17, yPos+43)], fill=colors[1], width=5)     #line1
+    draw.line([(xPos-6, yPos+40), (xPos-20, yPos+32)], fill=colors[1], width=5)     #cross1
+    
+    draw.line([(xPos+19, yPos+33), (xPos+11, yPos+47)], fill=colors[1], width=5)    #line2
+    draw.line([(xPos+22, yPos+44), (xPos+8, yPos+36)], fill=colors[1], width=5)     #cross2
+    
+    draw.line([(xPos-25, yPos+53), (xPos-33, yPos+67)], fill=colors[1], width=5)    #line3
+    draw.line([(xPos-22, yPos+64), (xPos-36, yPos+56)], fill=colors[1], width=5)    #cross3
+    
+    draw.line([(xPos+3, yPos+57), (xPos-5, yPos+71)], fill=colors[1], width=5)      #line4
+    draw.line([(xPos+6, yPos+68), (xPos-8, yPos+60)], fill=colors[1], width=5)      #cross4
+    
+    Circle(draw, (xPos-9, yPos+29), 2, colors[1], None, 0), Circle(draw, (xPos-17, yPos+43), 2, colors[1], None, 0)
+    Circle(draw, (xPos-6, yPos+40), 2, colors[1], None, 0), Circle(draw, (xPos-20, yPos+32), 2, colors[1], None, 0)
+    Circle(draw, (xPos+19, yPos+33), 2, colors[1], None, 0), Circle(draw, (xPos+11, yPos+47), 2, colors[1], None, 0)
+    Circle(draw, (xPos+22, yPos+44), 2, colors[1], None, 0), Circle(draw, (xPos+8, yPos+36), 2, colors[1], None, 0)
+    Circle(draw, (xPos-25, yPos+53), 2, colors[1], None, 0), Circle(draw, (xPos-33, yPos+67), 2, colors[1], None, 0)
+    Circle(draw, (xPos-22, yPos+64), 2, colors[1], None, 0), Circle(draw, (xPos-36, yPos+56), 2, colors[1], None, 0)
+    Circle(draw, (xPos+3, yPos+57), 2, colors[1], None, 0), Circle(draw, (xPos-5, yPos+71), 2, colors[1], None, 0)
+    Circle(draw, (xPos+6, yPos+68), 2, colors[1], None, 0), Circle(draw, (xPos-8, yPos+60), 2, colors[1], None, 0)
+
 def New(draw, xPos, yPos, colors):
     CloudWGap(draw, xPos, yPos, colors)
     
-    draw.line([(xPos-12, yPos+23), (xPos-24, yPos+44)], fill=colors[1], width=5)	#line1
-    draw.line([(xPos-7, yPos+51), (xPos-19, yPos+72)], fill=colors[1], width=5)     #line2
-    draw.line([(xPos+22, yPos+37), (xPos+10, yPos+58)], fill=colors[1], width=5)    #line3
+    draw.line([(xPos-30, yPos+27), (xPos-9, yPos+55)], fill=colors[1], width=5)
     
-    draw.line([(xPos+5, yPos+30), (xPos-3, yPos+44)], fill=colors[1], width=5)
-    draw.line([(xPos+8, yPos+41), (xPos-7+4+4-7, yPos+51-7-7-4-4+1+1+1+1)], fill=colors[1], width=5)
+    draw.line([(xPos-30, yPos+55), (xPos-9, yPos+55)], fill=colors[1], width=5)
+    draw.line([(xPos+7, yPos+55), (xPos+32, yPos+55)], fill=colors[1], width=5)
     
-    # Circle(draw, (xPos-7+4+4-7, yPos+51-7-7-4-4+1+1+1+1), 2, colors[1], None, 0)
-    # Circle(draw, (xPos-7+4+4+7, yPos+51-7-7+1+1+1+1), 2, colors[1], None, 0)
-    
-    # Circle(draw, (xPos-19+4+4+4+4, yPos+72-7-7-7-7), 2, colors[1], None, 0)
-    # Circle(draw, (xPos-7+4+4+4, yPos+51-7-7-7), 2, colors[1], None, 0)
-    
-    Circle(draw, (xPos-7, yPos+51), 2, colors[1], None, 0)
-
